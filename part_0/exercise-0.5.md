@@ -1,3 +1,6 @@
+# Sequence diagram for exercise
+
+```mermaid
 sequenceDiagram
     participant browser
     participant server
