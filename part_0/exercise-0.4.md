@@ -3,26 +3,28 @@ sequenceDiagram
     participant server
 
     browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
-    send new note
+    activate server
     server-->>browser: 302 to /exampleapp/notes
-    redirect to correct place after saving
+    deactivate server
+
+    Note left of server: save note, redirect to main page
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
-    get main page
-    server-->>browser: 200 OK
-    return main page
+    activate server
+    server-->>browser: main page
+    deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
-    get stylesheet
-    server-->>browser: 200 OK
-    return stylesheet
+    activate server
+    server-->>browser: style sheet
+    deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
-    get javascript content
-    server-->>browser: 200 OK
-    return javascript content
+    activate server
+    server-->>browser: javascript file
+    deactivate server
 
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
-    get data as JSON
-    server-->>browser: 200 OK
-    return data as JSON
+    activate server
+    server-->>browser: data JSON
+    deactivate server
