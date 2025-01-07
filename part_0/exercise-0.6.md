@@ -1,3 +1,5 @@
+# Sequence diagram for exercise
+
 sequenceDiagram
     participant browser
     participant server
