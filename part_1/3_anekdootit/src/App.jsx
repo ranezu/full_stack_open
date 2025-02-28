@@ -20,18 +20,34 @@ const App = () => {
     const copyOfVotes = new Map(votes)
     copyOfVotes.set(selected, (votes.get(selected) || 0) + 1)
     setVotes(copyOfVotes)
-    console.log('voted', selected, 'now has', votes.get(selected), 'votes')
+    console.log('voted', selected, 'which now has', votes.get(selected), 'votes')
     setRefreshCounter(refreshCounter + 1)
+  }
+
+  const findAnecdoteWithMostVotes = () => {
+    let maxVotes = 0
+    let anecdoteWithMostVotes = ''
+    for (const [anecdoteIndex, voteCount] of votes.entries()) {
+      if (voteCount > maxVotes) {
+        maxVotes = voteCount
+        anecdoteWithMostVotes = anecdotes[anecdoteIndex]
+      }
+    }
+    return anecdoteWithMostVotes
   }
 
   return (
     <div>
+      <h1>Anecdote of the day</h1>
       {anecdotes[selected]}
       <br />
       has {votes.get(selected) || 0} votes
       <br />
       <button onClick={vote()}>vote</button>
       <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote</button>
+
+      <h1>Anecdote with most votes</h1>
+      {findAnecdoteWithMostVotes()}
     </div>
   )
 }
