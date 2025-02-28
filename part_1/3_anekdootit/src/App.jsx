@@ -21,6 +21,7 @@ const App = () => {
     copyOfVotes.set(selected, (votes.get(selected) || 0) + 1)
     setVotes(copyOfVotes)
     console.log('voted', selected, 'which now has', votes.get(selected), 'votes')
+    // force refresh of component. is there really no better way to do this?
     setRefreshCounter(refreshCounter + 1)
   }
 
