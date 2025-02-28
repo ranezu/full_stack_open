@@ -1,5 +1,7 @@
 import { useState } from 'react'
 
+const votes = new Map()
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -14,10 +16,19 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
 
+  const vote = (selected) => () => {
+    votes.set(selected, (votes.get(selected) || 0) + 1)
+    console.log('voted', selected, 'now has', votes.get(selected), 'votes')
+    // TODO how to refresh the view?
+  }
+
   return (
     <div>
       {anecdotes[selected]}
       <br />
+      has {votes.get(selected) || 0} votes
+      <br />
+      <button onClick={vote(selected)}>vote</button>
       <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote</button>
     </div>
   )
