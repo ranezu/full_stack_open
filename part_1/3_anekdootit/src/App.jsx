@@ -15,11 +15,12 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [refreshCounter, setRefreshCounter] = useState(0)
 
   const vote = (selected) => () => {
     votes.set(selected, (votes.get(selected) || 0) + 1)
     console.log('voted', selected, 'now has', votes.get(selected), 'votes')
-    // TODO how to refresh the view?
+    setRefreshCounter(refreshCounter + 1)
   }
 
   return (
