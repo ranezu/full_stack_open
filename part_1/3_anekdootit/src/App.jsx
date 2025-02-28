@@ -1,7 +1,5 @@
 import { useState } from 'react'
 
-const votes = new Map()
-
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -15,10 +13,13 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(new Map())
   const [refreshCounter, setRefreshCounter] = useState(0)
 
-  const vote = (selected) => () => {
-    votes.set(selected, (votes.get(selected) || 0) + 1)
+  const vote = () => () => {
+    const copyOfVotes = new Map(votes)
+    copyOfVotes.set(selected, (votes.get(selected) || 0) + 1)
+    setVotes(copyOfVotes)
     console.log('voted', selected, 'now has', votes.get(selected), 'votes')
     setRefreshCounter(refreshCounter + 1)
   }
@@ -29,7 +30,7 @@ const App = () => {
       <br />
       has {votes.get(selected) || 0} votes
       <br />
-      <button onClick={vote(selected)}>vote</button>
+      <button onClick={vote()}>vote</button>
       <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote</button>
     </div>
   )
