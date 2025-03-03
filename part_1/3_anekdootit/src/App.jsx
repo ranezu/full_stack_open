@@ -14,15 +14,12 @@ const App = () => {
 
   const [selected, setSelected] = useState(0)
   const [votes, setVotes] = useState(new Map())
-  const [refreshCounter, setRefreshCounter] = useState(0)
-
-  const vote = () => () => {
+  
+  const vote = () => {
     const copyOfVotes = new Map(votes)
     copyOfVotes.set(selected, (votes.get(selected) || 0) + 1)
     setVotes(copyOfVotes)
     console.log('voted', selected, 'which now has', votes.get(selected), 'votes')
-    // force refresh of component. is there really no better way to do this?
-    setRefreshCounter(refreshCounter + 1)
   }
 
   const findAnecdoteWithMostVotes = () => {
@@ -44,7 +41,7 @@ const App = () => {
       <br />
       has {votes.get(selected) || 0} votes
       <br />
-      <button onClick={vote()}>vote</button>
+      <button onClick={vote}>vote</button>
       <button onClick={() => setSelected(Math.floor(Math.random() * anecdotes.length))}>next anecdote</button>
 
       <h1>Anecdote with most votes</h1>

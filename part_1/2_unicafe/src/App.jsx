@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-const Button = (props) => {
+const Button = ({ oldValue, text, setter }) => {
   return (
-    <button onClick={() => props.setter(props.oldValue + 1)}>{props.text}</button>
+    <button onClick={() => setter(oldValue + 1)}>{text}</button>
   )
 }
 
